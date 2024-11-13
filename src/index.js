@@ -9,6 +9,7 @@ import statsRoutes from "./routes/admin.route.js";
 import fileUpload from "express-fileupload";
 import { connectDB } from "./config/database.config.js";
 import { clerkMiddleware } from "@clerk/express";
+import cors from "cors";
 import path from "path";
 
 dotenv.config();
@@ -17,6 +18,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: "10mb" }));
 // this will add auth to request object => req.auth
 app.use(clerkMiddleware());

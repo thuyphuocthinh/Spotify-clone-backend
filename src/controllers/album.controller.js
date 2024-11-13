@@ -6,7 +6,8 @@ export const getAllAlbum = async (req, res, next) => {
     const albums = await Album.find();
     return res.status(200).json({
       success: true,
-      message: albums,
+      message: "success",
+      data: albums,
     });
   } catch (error) {
     console.log(">>> error in getting all albums: ", error.message);
@@ -33,7 +34,8 @@ export const getAlbumById = async (req, res, next) => {
     }
     return res.status(200).json({
       success: true,
-      message: albums,
+      message: "success",
+      data: albums,
     });
   } catch (error) {
     console.log(">>> error in getting album by id: ", error.message);
