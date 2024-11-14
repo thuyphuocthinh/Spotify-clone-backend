@@ -11,12 +11,18 @@ import { connectDB } from "./config/database.config.js";
 import { clerkMiddleware } from "@clerk/express";
 import cors from "cors";
 import path from "path";
+import { createServer } from "http";
+import { initializeSocket } from "./config/socket.config.js";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
+
+// server for express, socket
+const httpServer = createServer(app);
+initializeSocket(httpServer);
 
 app.use(
   cors({
@@ -57,7 +63,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   connectDB();
   console.log(`Server running on port ${PORT}`);
 });
