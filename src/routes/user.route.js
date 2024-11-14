@@ -7,5 +7,6 @@ import {
 const router = express.Router();
 
 router.get("/", protectedRoute, requiredAdmin, userController.getAllUsers);
+router.get("/messages/:userId", protectedRoute, userController.getMessages);
 
 export default router;
