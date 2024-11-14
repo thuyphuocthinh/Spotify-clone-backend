@@ -5,7 +5,7 @@ import authRoutes from "./routes/auth.route.js";
 import adminRoutes from "./routes/admin.route.js";
 import songsRoutes from "./routes/song.route.js";
 import albumsRoutes from "./routes/album.route.js";
-import statsRoutes from "./routes/admin.route.js";
+import statsRoutes from "./routes/stats.route.js";
 import fileUpload from "express-fileupload";
 import { connectDB } from "./config/database.config.js";
 import { clerkMiddleware } from "@clerk/express";
@@ -25,6 +25,7 @@ app.use(
   })
 );
 app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true }));
 // this will add auth to request object => req.auth
 app.use(clerkMiddleware());
 app.use(
